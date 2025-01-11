@@ -28,3 +28,8 @@ class User(AbstractUser):
         return self.email
     
 
+    def save(self, *args, **kwargs):
+        if not self.username:
+            self.username = self.email  # Set username to email if not provided
+        super().save(*args, **kwargs)
+

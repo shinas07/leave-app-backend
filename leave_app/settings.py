@@ -29,6 +29,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
+    "https://leave-app-frontend.vercel.app",
     "http://localhost:5173",  # Your frontend URL
 ]
 

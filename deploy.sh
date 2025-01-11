@@ -12,4 +12,4 @@ python manage.py migrate
 
 # Optionally create a superuser (uncomment if needed)
 echo "Creating superuser..."
-python manage.py createsuperuser --noinput
+   python manage.py createsuperuser --noinput --username $SUPERUSER_USERNAME --email $SUPERUSER_EMAIL

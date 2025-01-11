@@ -2,6 +2,9 @@ ECHO is on.
 #!/bin/bash
 # deploy.sh
 
+echo "Installing dependencies..."
+pip install -r requirements.txt
+
 # Collect static files
 echo "Collecting static files..."
 python manage.py collectstatic --no-input

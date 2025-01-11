@@ -26,7 +26,13 @@ SECRET_KEY = 'django-insecure-n81ttnxz&z&g^1cndg(g$g06!3i19y03c$2x!771k#5437jz%8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = [
+    'leave-app-backend-25r7.onrender.com',
+    'https://leave-app-frontend.vercel.app',     
+    'localhost',                             
+    '127.0.0.1',                            
+]
 
 CORS_ALLOWED_ORIGINS = [
     "https://leave-app-frontend.vercel.app",

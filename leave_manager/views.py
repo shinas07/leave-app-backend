@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from accounts.models import User
 from rest_framework import generics
 from django.db.models import Count, Q
+from .permissions import IsManager
 # Create your views here.
 
 # Employee Logic
@@ -80,13 +81,13 @@ class LeaveHistory(APIView):
         return Response(serializer.data,status=status.HTTP_200_OK)
     
 # Manager Logic
-
 class EmployeeListView(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsManager]
     serializer_class = EmployeeSerializer
     queryset = User.objects.filter(user_type=User.UserType.EMPLOYEE)
+    
 class LeaveApprovalView(APIView):
-    permission_class = [IsAuthenticated]
+    permission_class = [IsAuthenticated, IsManager]
     def patch(self, request, pk):
         try:
             leave_request = LeaveRequest.objects.get(pk=pk)
@@ -100,14 +101,14 @@ class LeaveApprovalView(APIView):
 
 
 class AllLeaveRequestsView(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsManager]
     serializer_class = LeaveRequestSerializer
 
     def get_queryset(self):
         return LeaveRequest.objects.all().order_by('-created_at')
      
 class LeaveRequestList(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsManager]
 
     def get(self, request):
         leave_requests = LeaveRequest.objects.filter(status='pending')  # Fetch all leave requests
@@ -116,7 +117,7 @@ class LeaveRequestList(APIView):
     
 
 class ApproveLeaveRequest(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsManager]
 
     def post(self, request):
         request_id = request.data.get('requestId')
@@ -129,7 +130,7 @@ class ApproveLeaveRequest(APIView):
             return Response({'error': 'Leave request not found.'}, status=status.HTTP_404_NOT_FOUND)
 
 class RejectLeaveRequest(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsManager]
 
     def post(self, request):
         request_id = request.data.get('requestId')
@@ -144,7 +145,7 @@ class RejectLeaveRequest(APIView):
 
 class CreateEmployeeView(generics.CreateAPIView):
     serializer_class = CreateEmployeeSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,IsManager]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -158,7 +159,7 @@ class CreateEmployeeView(generics.CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class DashboardStatsView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsManager]
 
     def get(self, request):
         # Get counts for different types of requests
@@ -179,7 +180,7 @@ class DashboardStatsView(APIView):
         })
 
 class DashboardRequestsView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsManager]
 
     def get(self, request):
         # Get recent leave requests (last 10)

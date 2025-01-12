@@ -84,7 +84,7 @@ class LoginView(APIView):
             # Authenticate user
             authenticated_user = authenticate(request, email=email, password=password)
             if authenticated_user is None:
-                return Response({'error': 'Invalid credentials'}, status=status.status.HTTP_403_FORBIDDEN)
+                return Response({'error': 'Invalid credentials'}, status=status.HTTP_403_FORBIDDEN)
 
             # Generate tokens
             refresh = RefreshToken.for_user(authenticated_user)

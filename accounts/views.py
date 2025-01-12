@@ -8,8 +8,17 @@ from rest_framework import status
 from .serializer import UserSerializer
 from accounts.models import User  
 from django.contrib.auth.hashers import make_password
+from django.http import HttpResponse
+from django.http import JsonResponse
 
 
+# Render rounte and health checkup
+def home_view(request):
+    return HttpResponse("Service is running!")
+
+
+def health_check(request):
+    return JsonResponse({"status": "OK"})
 
 class RegisterManagerView(APIView):
     def post(self, request):

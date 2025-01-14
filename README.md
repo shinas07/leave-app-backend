@@ -56,19 +56,33 @@ python manage.py runserver
 
 ## 📌 API Endpoints
 
-### Authentication
-- `POST /api/token/` - Get JWT token
-- `POST /api/token/refresh/` - Refresh JWT token
+### Authentication (`/auth/`)
+- `POST /auth/login/` - User login
+- `POST /auth/logout/` - User logout
+- `POST /auth/refresh/` - Refresh JWT token
+- `GET /auth/user/` - Get user details
+- `POST /auth/register-manager/` - Register new manager
 
-### Leave Management
-- `GET /api/leave-history/` - List all leaves
-- `POST /api/apply-leave/` - Create leave request
-- `GET /api/dashboard/datas/` - Get dashboard details
-- `DELETE /api/leaves/<id>/` - Delete leave request
+### Leave Management (`/api/`)
+- `POST /api/apply-leave/` - Submit leave application
+- `PUT /api/approve-leave/<int:pk>/` - Approve specific leave request
+- `GET /api/leave-history/` - View leave history
+- `GET /api/dashboard/datas/` - Get dashboard data
+- `GET /api/leave/requests/` - Get leave requests
+- `POST /api/leave/approve/` - Approve leave request
+- `POST /api/leave/reject/` - Reject leave request
+- `GET /api/leave/all-requests/` - View all leave requests
 
-### User Management
-- `GET /api/employees/` - List all users
-- `GET /api/leave/all-requests` - Get all leave requests
+### Employee Management (`/api/`)
+- `GET /api/employees/` - List all employees
+- `POST /api/employees/create/` - Create new employee
+- `GET /api/dashboard/stats/` - Get dashboard statistics
+- `GET /api/dashboard/requests/` - Get dashboard requests
+
+### System Health
+- `GET /health/` - Health check endpoint
+- `GET /` - Home view
+- `GET /admin/` - Admin interface
 
 ## 🌐 Deployment (Render)
 
@@ -108,8 +122,8 @@ Common issues and solutions:
    - Run `python manage.py collectstatic`
    - Check `STATIC_ROOT` in settings
 
-📝 Conclusion
+## 📝 Conclusion
 This backend system provides a robust solution for managing leave applications, approval workflows, and user authentication. For more details or to contribute, feel free to open an issue or submit a pull request.
 
-📞 Contact
+## 📞 Contact
 For questions or support, please reach out to [shinasaman07@gmail.com]

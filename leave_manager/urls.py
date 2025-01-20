@@ -1,11 +1,11 @@
-from .views import LeaveApplication, LeaveApprovalView,LeaveHistory,  LeaveRequestList, ApproveLeaveRequest, RejectLeaveRequest, DashbaordLeaveHistory,EmployeeListView, AllLeaveRequestsView, CreateEmployeeView, DashboardRequestsView, DashboardStatsView
+from .views import LeaveApplication, LeaveApprovalView,LeaveHistory,  LeaveRequestList, ApproveLeaveRequest, RejectLeaveRequest, DashboardLeaveHistory,EmployeeListView, AllLeaveRequestsView, CreateEmployeeView, DashboardRequestsView, DashboardStatsView
 from django.urls import path
 
 urlpatterns = [
     path('apply-leave/',LeaveApplication.as_view(),name='apply-leave'),
     path('approve-leave/<int:pk>/', LeaveApprovalView.as_view(), name='approve-leave'),
     path('leave-history/', LeaveHistory.as_view(), name='leave-history'),
-    path('dashboard/datas/', DashbaordLeaveHistory.as_view(), name='leave-history'),
+    path('dashboard/datas/', DashboardLeaveHistory.as_view(), name='leave-history'),
 
 
     path('employees/', EmployeeListView.as_view(), name='employee-list'),

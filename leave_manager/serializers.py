@@ -4,18 +4,20 @@ from accounts.models import User
 from django.contrib.auth.password_validation import validate_password
 
 
-# class LeaveTypeSerializer(serializers.ModelSerializer):
+
+# class LeaveRequestSerializer(serializers.ModelSerializer):
+#     user_email = serializers.EmailField(source='user.email', read_only=True)
 #     class Meta:
-#         model = LeaveType
-#         fildes = '__all__'
+#         model = LeaveRequest
+#         fields = ['id', 'user','user_email', 'leave_type', 'start_date', 'end_date', 'reason', 'status']
+#         read_only_fields = ['user', 'status']
 
 class LeaveRequestSerializer(serializers.ModelSerializer):
     user_email = serializers.EmailField(source='user.email', read_only=True)
     class Meta:
         model = LeaveRequest
-        fields = ['id', 'user','user_email', 'leave_type', 'start_date', 'end_date', 'reason', 'status']
-        read_only_fields = ['user', 'status']
-
+        fields = ['id', 'leave_type', 'start_date', 'end_date', 'reason', 'status', 'duration', 'created_at','user_email']
+        read_only_fields = ['status', 'duration']
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:

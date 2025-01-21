@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-from decouple import config 
 
 
 # Quick-start development settings - unsuitable for production
@@ -102,14 +102,27 @@ WSGI_APPLICATION = 'leave_app.wsgi.application'
 # }
 
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'), 
+#         'PORT': config('DB_PORT', default='5432'),
+#    }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),  # Use environment variable for database name
-        'USER': config('DB_USER'),  # Use environment variable for database user
-        'PASSWORD': config('DB_PASSWORD'),  # Use environment variable for database password
-        'HOST': config('DB_HOST'),  # Use environment variable for database host
-        'PORT': config('DB_PORT', default='5432'),  # Use environment variable for database port, default to 5432
+        'NAME': 'leave_management_db',
+        'USER': 'postgres',
+        'PASSWORD': 'SA9207',
+        'HOST': 'localhost',  
+        'PORT': '5432',       
     }
 }
 
